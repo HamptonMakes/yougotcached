@@ -22,17 +22,20 @@
           }
         }
         else() {
-          export("No-Cookie", "true")
+          //export("No-Cookie", "true")
           remove()
         }
       }
     }
   }
-  match($path, %matcher) {
-    export("Cache-Time", "0")
-    jsonlib.set_json()
+  match($path) {
+    with(%matcher) {
+      jsonlib.set_json()
+    }
+    else() {
+      delete_set_cookie("_cachemeifyoucan_session")
+    }
   }
-
 }
 
 @func XMLNode.dynamic_section() {

@@ -22,6 +22,7 @@
           }
         }
         else() {
+          export("No-Cookie", "true")
           remove()
         }
       }

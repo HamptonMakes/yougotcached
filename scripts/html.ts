@@ -1,7 +1,5 @@
 # HTML Transformations go here
 
-export("Cache-Time", "1200")
-
 $("/html") {
   rewrite_links()
   absolutize_srcs()

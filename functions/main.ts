@@ -28,14 +28,22 @@
     }
   }
   match($path, %matcher) {
+    export("Cache-Time", "0")
     jsonlib.set_json()
   }
 
 }
 
 @func XMLNode.dynamic_section() {
-  insert_at("after", "span", "", data-cache-hold: "true")
+  insert_at("after", "span", _mw_temporary: "truecache")
   move_to("/cachebox")
+  $("/cachebox/*") {
+    $cacher_count = index()
+  }
+  $("//span[@_mw_temporary]") {
+    attributes(data-cache-hold: $cacher_count)
+    attribute("_mw_temporary") { remove() }
+  }
 }
 
 # BTN DELEGATE

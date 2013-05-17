@@ -3,6 +3,9 @@ $detected_content_type = $content_type
 match($x_requested_with, /XMLHttpRequest/) {
   $detected_content_type = "application/x-ajax"
 }
+match($x_requested_with, /CacheRequest/) {
+  $detected_content_type = "text/html"
+}
 match($detected_content_type) {
   with(/html/) {
     replace(/fb:/, "fbn_") # Rewrite the xmlns facebook nodes before the html parser clobbers them

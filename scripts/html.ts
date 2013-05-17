@@ -17,4 +17,8 @@ $("/html") {
   $$(".dynamic") {
     dynamic_section()
   }
+
+  $$(".count") {
+    dynamic_section()
+  }
 }

@@ -2,6 +2,42 @@
 ### Site Functions
 ####################
 
+@func Text.cacheable_html(Text %enc) {
+  %matcher = /_mw_cached_fragments=true/
+
+  html(%enc) {
+    $("/") {
+      insert_after("cachebox")
+    }
+
+    yield()
+
+    $("/cachebox") {
+      match($path) {
+        with(%matcher) {
+          jsonlib.array() {
+            $("/cachebox/*") {
+              jsonlib.append(fetch("."))
+            }
+          }
+        }
+        else() {
+          remove()
+        }
+      }
+    }
+  }
+  match($path, %matcher) {
+    jsonlib.set_json()
+  }
+
+}
+
+@func XMLNode.dynamic_section() {
+  insert_at("after", "span", "", data-cache-hold: "true")
+  move_to("/cachebox")
+}
+
 # BTN DELEGATE
 # 
 # EXAMPLE CSS

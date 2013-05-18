@@ -22,7 +22,7 @@
           }
         }
         else() {
-          //export("No-Cookie", "true")
+          export("No-Cookie", "true")
           remove()
         }
       }
@@ -33,7 +33,7 @@
       jsonlib.set_json()
     }
     else() {
-      delete_set_cookie("_cachemeifyoucan_session")
+      //delete_set_cookie("_cachemeifyoucan_session")
     }
   }
 }

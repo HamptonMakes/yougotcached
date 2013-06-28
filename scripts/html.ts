@@ -13,10 +13,10 @@ $("/html") {
   
 
   $$(".dynamic") {
-    dynamic_section()
+    cache.dynamic_section()
   }
 
   $$(".count") {
-    dynamic_section()
+    cache.dynamic_section()
   }
 }

@@ -2,53 +2,7 @@
 ### Site Functions
 ####################
 
-@func Text.cacheable_html(Text %enc) {
-  %matcher = /_mw_cached_fragments=true/
-
-  html(%enc) {
-    $("/") {
-      insert_after("cachebox")
-    }
-
-    yield()
-
-    $("/cachebox") {
-      match($path) {
-        with(%matcher) {
-          jsonlib.array() {
-            $("/cachebox/*") {
-              jsonlib.append(fetch("."))
-            }
-          }
-        }
-        else() {
-          export("No-Cookie", "true")
-          remove()
-        }
-      }
-    }
-  }
-  match($path) {
-    with(%matcher) {
-      jsonlib.set_json()
-    }
-    else() {
-      //delete_set_cookie("_cachemeifyoucan_session")
-    }
-  }
-}
-
-@func XMLNode.dynamic_section() {
-  insert_at("after", "span", _mw_temporary: "truecache")
-  move_to("/cachebox")
-  $("/cachebox/*") {
-    $cacher_count = index()
-  }
-  $("//span[@_mw_temporary]") {
-    attributes(data-cache-hold: $cacher_count)
-    attribute("_mw_temporary") { remove() }
-  }
-}
+@import "cache.ts";
 
 # BTN DELEGATE
 # 

@@ -2,7 +2,6 @@
 ### Site Functions
 ####################
 
-@import "cache.ts";
 
 # BTN DELEGATE
 # 
